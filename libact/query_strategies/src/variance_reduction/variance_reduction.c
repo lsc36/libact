@@ -5,9 +5,9 @@
 #include <lapacke.h>
 
 /* DGESVD prototype */
-extern void LAPACK_dgesvd( char* jobu, char* jobvt, int* m, int* n, double* a,
-                    int* lda, double* s, double* u, int* ldu, double* vt, int* ldvt,
-                    double* work, int* lwork, int* info );
+extern void LAPACK_dgesvd( char const* jobu, char const* jobvt, lapack_int const* m, lapack_int const* n, double* a,
+                    lapack_int const* lda, double* s, double* u, lapack_int const* ldu, double* vt, lapack_int const* ldvt,
+                    double* work, lapack_int const* lwork, lapack_int* info );
 
 double** An(double *pi, double *x, int labs, int dims);
 double** A(double **PI, double **X, int labs, int dims, int n_pool);
