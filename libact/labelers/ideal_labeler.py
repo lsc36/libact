@@ -20,7 +20,8 @@ class IdealLabeler(Labeler):
 
     """
 
-    def __init__(self, dataset, **kwargs):
+    def __init__(self, dataset):
+        super().__init__()
         X, y = dataset.get_entries()
         # make sure the input dataset is fully labeled
         assert (np.array(y) != np.array(None)).all()
@@ -29,7 +30,7 @@ class IdealLabeler(Labeler):
 
     @inherit_docstring_from(Labeler)
     def label(self, feature):
-        yy = self.y[np.where([np.array_equal(x, feature)
-                              for x in self.X])[0]]
-        ind = np.arange(len(yy))
-        return yy[np.random.choice(ind, 1)[0]]
+        labels = self.y[np.where([np.array_equal(x, feature)
+                                  for x in self.X])[0]]
+        ind = np.arange(len(labels))
+        return labels[np.random.choice(ind, 1)[0]]

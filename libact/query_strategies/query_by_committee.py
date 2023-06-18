@@ -73,7 +73,7 @@ class QueryByCommittee(QueryStrategy):
     """
 
     def __init__(self, *args, **kwargs):
-        super(QueryByCommittee, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         self.disagreement = kwargs.pop('disagreement', 'vote')
 

@@ -18,6 +18,7 @@ class LogisticRegression(ProbabilisticModel):
     """
 
     def __init__(self, *args, **kwargs):
+        super().__init__()
         self.model = sklearn.linear_model.LogisticRegression(*args, **kwargs)
 
     def train(self, dataset, *args, **kwargs):
@@ -38,4 +39,3 @@ class LogisticRegression(ProbabilisticModel):
 
     def predict_proba(self, feature, *args, **kwargs):
         return self.model.predict_proba(feature, *args, **kwargs)
-

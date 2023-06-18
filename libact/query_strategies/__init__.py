@@ -3,6 +3,8 @@ Concrete query strategy classes.
 """
 from __future__ import absolute_import
 
+# pylint: disable=wrong-import-position
+
 import os
 ON_RTD = os.environ.get('READTHEDOCS', None) == 'True'
 import logging

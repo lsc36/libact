@@ -16,4 +16,3 @@ class MultiLabelCriteriaTestCase(unittest.TestCase):
                       [1, 0, 1, 1, 0],])
         assert_array_almost_equal(pairwise_rank_loss(a, b), [-2.5, -3.5, -1])
         assert_array_almost_equal(pairwise_f1_score(a, b), [0.5, 0.4, 0.8])
-

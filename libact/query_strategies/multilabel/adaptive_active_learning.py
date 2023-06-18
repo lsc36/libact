@@ -6,8 +6,8 @@ import numpy as np
 from joblib import Parallel, delayed
 
 from libact.base.dataset import Dataset
-from libact.base.interfaces import QueryStrategy, ContinuousModel
-from libact.utils import inherit_docstring_from, seed_random_state, zip
+from libact.base.interfaces import QueryStrategy
+from libact.utils import inherit_docstring_from, seed_random_state
 from libact.models.multilabel import BinaryRelevance
 
 
@@ -77,12 +77,13 @@ class AdaptiveActiveLearning(QueryStrategy):
 
     def __init__(self, dataset, base_clf, betas=None, n_jobs=1,
             random_state=None):
-        super(AdaptiveActiveLearning, self).__init__(dataset)
+        super().__init__(dataset)
 
         self.n_labels = len(self.dataset.data[0][1])
 
         self.base_clf = copy.deepcopy(base_clf)
 
+        # pyline: disable=fixme
         # TODO check beta value
         self.betas = betas
         if self.betas is None:

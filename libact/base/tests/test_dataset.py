@@ -75,7 +75,7 @@ class TestDatasetMethods(unittest.TestCase):
 
     def test_get_unlabeled_entries(self):
         dataset = self.setup_dataset()
-        idx, X = dataset.get_unlabeled_entries()
+        _, X = dataset.get_unlabeled_entries()
         self.assertTrue(np.array_equal(X[0], np.array([6, 7, 8])))
         self.assertTrue(np.array_equal(X[1], np.array([12, 13, 14])))
 

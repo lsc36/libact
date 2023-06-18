@@ -50,7 +50,7 @@ class VarianceReduction(QueryStrategy):
     """
 
     def __init__(self, *args, **kwargs):
-        super(VarianceReduction, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         model = kwargs.pop('model', None)
         if isinstance(model, str):
             self.model = getattr(libact.models, model)()

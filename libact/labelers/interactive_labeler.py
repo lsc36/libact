@@ -26,6 +26,7 @@ class InteractiveLabeler(Labeler):
     """
 
     def __init__(self, **kwargs):
+        super().__init__()
         self.label_name = kwargs.pop('label_name', None)
 
     @inherit_docstring_from(Labeler)

@@ -3,13 +3,15 @@
 An interface for scikit-learn's C-Support Vector Classifier model.
 """
 import logging
-LOGGER = logging.getLogger(__name__)
 
 import numpy as np
 import sklearn.svm
 from sklearn.multiclass import OneVsRestClassifier
 
 from libact.base.interfaces import ContinuousModel
+
+
+LOGGER = logging.getLogger(__name__)
 
 
 class SVM(ContinuousModel):
@@ -46,8 +48,8 @@ class SVM(ContinuousModel):
         dvalue = self.model.decision_function(feature, *args, **kwargs)
         if len(np.shape(dvalue)) == 1:  # n_classes == 2
             return np.vstack((-dvalue, dvalue)).T
-        else:
-            if self.decision_function_shape != 'ovr':
-                LOGGER.warn("SVM model support only 'ovr' for multiclass"
-                            "predict_real.")
-            return dvalue
+
+        if self.decision_function_shape != 'ovr':
+            LOGGER.warning("SVM model support only 'ovr' for multiclass"
+                           "predict_real.")
+        return dvalue

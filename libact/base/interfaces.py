@@ -36,7 +36,6 @@ class QueryStrategy(with_metaclass(ABCMeta, object)):
         label : float
             The label of the queried sample.
         """
-        pass
 
     def _get_scores(self):
         """Return the score used for making query, the larger the better. Read-only.
@@ -48,7 +47,6 @@ class QueryStrategy(with_metaclass(ABCMeta, object)):
         (ask_id, scores): list of tuple (int, float)
             The index of the next unlabeled sample to be queried and the score assigned.
         """
-        pass
 
     @abstractmethod
     def make_query(self):
@@ -61,7 +59,6 @@ class QueryStrategy(with_metaclass(ABCMeta, object)):
         ask_id : int
             The index of the next unlabeled sample to be queried and labeled.
         """
-        pass
 
 
 class Labeler(with_metaclass(ABCMeta, object)):
@@ -84,7 +81,6 @@ class Labeler(with_metaclass(ABCMeta, object)):
         label : int
             The class label of the queried feature.
         """
-        pass
 
 
 class Model(with_metaclass(ABCMeta, object)):
@@ -108,7 +104,6 @@ class Model(with_metaclass(ABCMeta, object)):
         self : object
             Returns self.
         """
-        pass
 
     @abstractmethod
     def predict(self, feature, *args, **kwargs):
@@ -124,7 +119,6 @@ class Model(with_metaclass(ABCMeta, object)):
         y_pred : array-like, shape (n_samples,)
             The class labels for samples in the feature array.
         """
-        pass
 
     @abstractmethod
     def score(self, testing_dataset, *args, **kwargs):
@@ -141,7 +135,6 @@ class Model(with_metaclass(ABCMeta, object)):
         score : float
             Mean accuracy of self.predict(X) wrt. y.
         """
-        pass
 
 
 class MultilabelModel(Model):
@@ -150,7 +143,6 @@ class MultilabelModel(Model):
     A Model returns a multilabel-predicting function for future samples after
     trained on a training dataset.
     """
-    pass
 
 
 class ContinuousModel(Model):
@@ -183,7 +175,6 @@ class ContinuousModel(Model):
             Each entry is the confidence scores per (sample, class)
             combination.
         """
-        pass
 
 
 class ProbabilisticModel(ContinuousModel):
@@ -210,4 +201,3 @@ class ProbabilisticModel(ContinuousModel):
         X : array-like, shape (n_samples, n_classes)
             Each entry is the prabablity estimate for each class.
         """
-        pass

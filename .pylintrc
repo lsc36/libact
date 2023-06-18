@@ -32,13 +32,14 @@ callbacks=cb_,_cb
 bad-functions=map,filter
 
 # Good variable names which should always be accepted, separated by a comma
-# x, y, X, Y - vector maxtrix of features and labels.
+# x, y, X, Y, Z - vector maxtrix of features and labels.
 # P, p - probability distribution
 # qs - query strategry
 # w, W - weight vector
 # N - number of instances
 # T, K - number of iterations
-good-names=i,j,k,_,X,Y,x,y,P,p,qs,w,W,N,T,K
+# up, down - numerator and denominator of the fraction
+good-names=i,j,k,_,X,Y,Z,x,y,P,p,qs,w,W,N,T,K,up,down
 
 # Regular expression matching correct attribute names
 attr-rgx=[a-z_][a-z0-9_]{2,30}$

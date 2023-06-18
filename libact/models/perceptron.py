@@ -16,6 +16,7 @@ class Perceptron(Model):
     """
 
     def __init__(self, *args, **kwargs):
+        super().__init__()
         self.model = sklearn.linear_model.Perceptron(*args, **kwargs)
 
     def train(self, dataset, *args, **kwargs):

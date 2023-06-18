@@ -1,3 +1,5 @@
+"""Implementation of loss/score functions for multi-label evaluation."""
+
 import numpy as np
 
 def pairwise_rank_loss(Z, Y): #truth(Z), prediction(Y)

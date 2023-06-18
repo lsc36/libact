@@ -1,7 +1,7 @@
 """scikit-learn classifier adapter
 """
 from sklearn.base import clone
-from libact.base.interfaces import Model, ContinuousModel, ProbabilisticModel
+from libact.base.interfaces import Model, ProbabilisticModel
 
 
 class SklearnAdapter(Model):
@@ -37,6 +37,7 @@ class SklearnAdapter(Model):
     """
 
     def __init__(self, clf):
+        super().__init__()
         self._model = clf
 
     def train(self, dataset, *args, **kwargs):
@@ -50,6 +51,8 @@ class SklearnAdapter(Model):
                                 **kwargs)
 
     def clone(self):
+        """Constructs a new untrained model with the same parameters.
+        """
         return SklearnProbaAdapter(clone(self._model))
 
 
@@ -89,6 +92,7 @@ class SklearnProbaAdapter(ProbabilisticModel):
     """
 
     def __init__(self, clf):
+        super().__init__()
         self._model = clf
 
     def train(self, dataset, *args, **kwargs):
@@ -108,4 +112,6 @@ class SklearnProbaAdapter(ProbabilisticModel):
         return self._model.predict_proba(feature, *args, **kwargs)
 
     def clone(self):
+        """Constructs a new untrained model with the same parameters.
+        """
         return SklearnProbaAdapter(clone(self._model))
