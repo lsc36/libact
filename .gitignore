@@ -61,3 +61,7 @@ target/
 examples/australian.txt
 examples/diabetes.txt
 examples/heart.txt
+
+libact/query_strategies/_hintsvm.c
+.devcontainer/
+.github/dependabot.yml

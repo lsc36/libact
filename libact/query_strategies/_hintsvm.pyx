@@ -1,9 +1,9 @@
 #defining NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
 
-import  numpy as np
+import numpy as np
 cimport numpy as np
 from libc.stdlib cimport free
-cimport _hintsvm
+from . cimport _hintsvm
 
 cdef extern from *:
     ctypedef struct svm_parameter:

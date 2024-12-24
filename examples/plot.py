@@ -10,15 +10,12 @@ import os
 
 import numpy as np
 import matplotlib.pyplot as plt
-try:
-    from sklearn.model_selection import train_test_split
-except ImportError:
-    from sklearn.cross_validation import train_test_split
+from sklearn.model_selection import train_test_split
 
 # libact classes
 from libact.base.dataset import Dataset, import_libsvm_sparse
 from libact.models import LogisticRegression
-from libact.query_strategies import RandomSampling, UncertaintySampling
+from libact.query_strategies import RandomSampling, UncertaintySampling, VarianceReduction, HintSVM
 from libact.labelers import IdealLabeler
 
 
@@ -64,6 +61,8 @@ def main():
     trn_ds, tst_ds, y_train, fully_labeled_trn_ds = \
         split_train_test(dataset_filepath, test_size, n_labeled)
     trn_ds2 = copy.deepcopy(trn_ds)
+    trn_ds3 = copy.deepcopy(trn_ds)
+    trn_ds4 = copy.deepcopy(trn_ds)
     lbr = IdealLabeler(fully_labeled_trn_ds)
 
     quota = len(y_train) - n_labeled    # number of samples to query
@@ -78,20 +77,33 @@ def main():
     model = LogisticRegression()
     E_in_2, E_out_2 = run(trn_ds2, tst_ds, lbr, model, qs2, quota)
 
+    # qs3 = VarianceReduction(trn_ds3, model=LogisticRegression())
+    # E_in_3, E_out_3 = run(trn_ds3, tst_ds, lbr, model, qs3, quota)
+
+    qs4 = HintSVM(trn_ds4)
+    E_in_4, E_out_4 = run(trn_ds4, tst_ds, lbr, model, qs4, quota)
+
     # Plot the learning curve of UncertaintySampling to RandomSampling
     # The x-axis is the number of queries, and the y-axis is the corresponding
     # error rate.
     query_num = np.arange(1, quota + 1)
-    plt.plot(query_num, E_in_1, 'b', label='qs Ein')
-    plt.plot(query_num, E_in_2, 'r', label='random Ein')
-    plt.plot(query_num, E_out_1, 'g', label='qs Eout')
-    plt.plot(query_num, E_out_2, 'k', label='random Eout')
+    plt.plot(query_num, E_in_1, 'b', label='qs Ein',
+             linestyle='dashed')
+    plt.plot(query_num, E_out_1, 'b', label='qs Eout')
+    plt.plot(query_num, E_in_2, 'r', label='random Ein',
+             linestyle='dashed')
+    plt.plot(query_num, E_out_2, 'r', label='random Eout')
+    # plt.plot(query_num, E_in_3, 'g', label='vr Ein',  linestyle='dashed')
+    # plt.plot(query_num, E_out_3, 'g', label='vr Eout')
+    plt.plot(query_num, E_in_4, 'k', label='SVM Ein',
+             linestyle='dashed')
+    plt.plot(query_num, E_out_4, 'k', label='SVM Eout')
     plt.xlabel('Number of Queries')
     plt.ylabel('Error')
     plt.title('Experiment Result')
     plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05),
                fancybox=True, shadow=True, ncol=5)
-    plt.show()
+    plt.savefig("test.png")
 
 
 if __name__ == '__main__':
